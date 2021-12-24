@@ -1,6 +1,7 @@
 const DB = require("../Models");
 const saloon = DB.saloons;
 const Owners = DB.owners;
+const Barber = DB.barbers;
 
 const create = async (req, res) => {
   const { name, address, lat, lng, owner_id } = req.body;
@@ -27,9 +28,16 @@ const create = async (req, res) => {
 
 const findAll = async (req, res) => {
   const results = await saloon.findAll({
-    where: {},
-    include: Owners,
-    attributes: { exclude: ["owner_id"] },
+    include: [
+      {
+        model: Owners,
+        attributes: ["first_name", "last_name", "mobile_number"],
+      },
+      { model: Barber, attributes: ["first_name", "last_name", "rating"] },
+    ],
+    attributes: {
+      exclude: ["owner_id", "saloon_id", "createdAt", "updatedAt"],
+    },
   });
   if (results) {
     return res.status(200).send({

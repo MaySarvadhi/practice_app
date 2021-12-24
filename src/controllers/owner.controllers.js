@@ -30,6 +30,22 @@ const create = async (req, res) => {
     });
   }
 };
+const findAll = async (req, res) => {
+  const results = await Owner.findAll();
+  if (results) {
+    return res.status(200).send({
+      status: true,
+      message: "successfully...",
+      data: results,
+    });
+  } else {
+    return res.status(500).send({
+      status: false,
+      message: "some thing went to wrong!!",
+    });
+  }
+};
 module.exports = {
   create,
+  findAll,
 };

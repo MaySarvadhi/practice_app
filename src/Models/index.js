@@ -10,6 +10,22 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.owners = require("./owner.model")(Sequelize, sequelize);
 db.saloons = require("./saloon.model")(Sequelize, sequelize);
+db.barbers = require("./barber.model")(Sequelize, sequelize);
+db.user = require("./user.model")(Sequelize, sequelize);
+db.barberRatings = require("./barber.rating.model")(Sequelize, sequelize);
+
+db.barbers.hasMany(db.barberRatings, {
+  foreignKey: "barber_id",
+});
+db.barberRatings.belongsTo(db.barbers, {
+  foreignKey: "barber_id",
+});
+db.saloons.hasMany(db.barbers, {
+  foreignKey: "saloon_id",
+});
+db.barbers.belongsTo(db.saloons, {
+  foreignKey: "saloon_id",
+});
 db.owners.hasMany(db.saloons, {
   foreignKey: "owner_id",
 });
