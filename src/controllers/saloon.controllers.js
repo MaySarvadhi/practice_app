@@ -33,7 +33,10 @@ const findAll = async (req, res) => {
         model: Owners,
         attributes: ["first_name", "last_name", "mobile_number"],
       },
-      { model: Barber, attributes: ["first_name", "last_name", "rating"] },
+      {
+        model: Barber,
+        attributes: ["first_name", "last_name", "rating", "id"],
+      },
     ],
     attributes: {
       exclude: ["owner_id", "saloon_id", "createdAt", "updatedAt"],

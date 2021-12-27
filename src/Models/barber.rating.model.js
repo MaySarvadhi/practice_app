@@ -6,7 +6,7 @@ module.exports = (Sequelize, sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
-    barber_id: {
+    barbers_id: {
       type: Sequelize.INTEGER,
       references: {
         model: "barbers", // 'fathers' refers to table name

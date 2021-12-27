@@ -28,8 +28,17 @@ const create = async (req, res) => {
 const findAll = async (req, res) => {
   const results = await Barber.findAll({
     where: {},
-    include: Saloons,
-    attributes: { exclude: ["saloon_id"] },
+    include: [
+      {
+        model: Saloons,
+        attributes: {
+          exclude: ["id", "createdAt", "updatedAt"],
+        },
+      },
+    ],
+    attributes: {
+      exclude: ["saloon_id", "createdAt", "updatedAt"],
+    },
   });
   if (results) {
     return res.status(200).send({

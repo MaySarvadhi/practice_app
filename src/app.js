@@ -6,6 +6,7 @@ const formData = require("express-form-data");
 const PORT = process.env.PORT || 6000;
 const DB = require("./Models");
 DB.sequelize.sync();
+
 app.use(cors());
 app.use(express.json());
 app.use("/api/v1", router);

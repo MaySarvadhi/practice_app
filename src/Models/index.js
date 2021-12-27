@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize("saloon", "root", "root", {
-  host: "localhost",
+  host: "127.0.0.1",
   dialect: "mysql",
   port: 3307,
 });
@@ -15,10 +15,10 @@ db.user = require("./user.model")(Sequelize, sequelize);
 db.barberRatings = require("./barber.rating.model")(Sequelize, sequelize);
 
 db.barbers.hasMany(db.barberRatings, {
-  foreignKey: "barber_id",
+  foreignKey: "barbers_id",
 });
 db.barberRatings.belongsTo(db.barbers, {
-  foreignKey: "barber_id",
+  foreignKey: "barbers_id",
 });
 db.saloons.hasMany(db.barbers, {
   foreignKey: "saloon_id",
